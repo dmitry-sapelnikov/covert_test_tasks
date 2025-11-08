@@ -15,6 +15,7 @@ void remove_second(std::vector<T> &target)
 	{
 		target[i] = std::move(target[i * 2]);
 	}
+	// We may use shrink_to_fit() instead of resize()
 	target.resize(new_size);
 }
 
