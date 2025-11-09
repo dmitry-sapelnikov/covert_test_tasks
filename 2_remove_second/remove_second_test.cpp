@@ -4,7 +4,7 @@
 #include "remove_second.h"
 
 /// Type of the test value
-using test_value_type = size_t;
+using test_value_type = int;
 
 /// Type of the test vector
 using test_vector_type = std::vector<test_value_type>;
@@ -15,11 +15,16 @@ using test_function_type =
 
 /**
 	\brief Creates a test vector of given size
-	The vector contains values from 1 to size.
+	The vector contains values from 0 to size - 1.
 */
 test_vector_type create_test_vector(size_t size)
 {
-	auto range = std::views::iota(test_value_type(1), test_value_type(size) + 1);
+	if (static_cast<size_t>(std::numeric_limits<test_value_type>::max()) < size)
+	{
+		throw std::runtime_error(
+			"Cannot create test vector: size exceeds max value of test_value_type");
+	}
+	auto range = std::views::iota(test_value_type(0), test_value_type(size));
 	return {range.begin(), range.end()};
 }
 
