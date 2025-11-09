@@ -8,7 +8,7 @@
 Я бы реализовал метод следующим образом:
 ```cpp
 template <typename T>
-[[nodiscard]] SharedPtr<T>::lock() const noexcept
+[[nodiscard]] WeakPtr<T>::lock() const noexcept
 {
     SharedPtr<T> result;
     result.construct_from_weak(*this);
@@ -16,7 +16,7 @@ template <typename T>
 }
 ```
 
-Метод `construct_from_weak`:
+Метод `SharedPtr::construct_from_weak`:
 ```cpp
 template <typename T>
 void SharedPtr<T>::construct_from_weak(const WeakPtr<T> &weak_ptr) noexcept
