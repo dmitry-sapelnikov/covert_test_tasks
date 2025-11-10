@@ -15,8 +15,8 @@ void remove_second(std::vector<T> &target)
 	{
 		target[i] = std::move(target[i * 2]);
 	}
-	// We may use shrink_to_fit() instead of resize()
 	target.resize(new_size);
+	// Optionally we may add shrink_to_fit() here
 }
 
 ///	Removes every second element from the input vector using std::remove_if
@@ -38,7 +38,6 @@ template <typename T>
 void remove_second_using_ranges(std::vector<T> &target)
 {
 	std::ranges::move(target | std::views::stride(2), target.begin());
-	
-	// We may use shrink_to_fit() instead of resize()
 	target.resize((target.size() / 2) + (target.size() % 2));
+	// Optionally we may add shrink_to_fit() here
 }
